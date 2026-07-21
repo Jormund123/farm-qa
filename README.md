@@ -11,14 +11,9 @@ assistant that can only answer from those checks.
 
 ## Run it
 
-You need Docker running.
+You need Docker running. From the project folder:
 
 ```bash
-# option 1: load the delivered image
-docker load -i farm-qa.tar
-docker run --rm -p 8000:8000 farm-qa
-
-# option 2: build it from source
 docker build -t farm-qa .
 docker run --rm -p 8000:8000 farm-qa
 ```
@@ -34,8 +29,7 @@ time:
 docker run --rm -p 8000:8000 -e GEMINI_API_KEY=your_key farm-qa
 ```
 
-The key is passed in at run time and never baked into the image, so the `.tar`
-carries no secret.
+The key is passed in at run time and never baked into the image.
 
 To run the tests, see "Running it locally" near the end.
 
