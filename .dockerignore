@@ -1,0 +1,14 @@
+**/__pycache__
+**/*.pyc
+.venv
+venv
+.pytest_cache
+.hypothesis
+web/node_modules
+farm-qa.tar
+.git
+.DS_Store
+.env
+.env.*
+!.env.example
+web/dist

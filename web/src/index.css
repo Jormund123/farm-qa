@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /*
+   * "Soft dark" system: near-black tone-stepped surfaces, pastel accents.
+   * Elevation is tone, not shadow: page → card → raised → chip.
+   * Accent fills always carry dark text.
+   */
+  :root {
+    --background: 240 9% 4%; /* page  #0A0A0C */
+    --card: 240 7% 8%; /* card  #141417 */
+    --raised: 240 8% 12%; /* tile  #1C1C21 */
+    --chip: 240 8% 16%; /* chip  #26262C */
+
+    --foreground: 0 0% 100%;
+    --card-foreground: 0 0% 100%;
+    --muted: 240 8% 12%;
+    --muted-foreground: 246 5% 62%; /* #9A9AA3 */
+
+    --primary: 257 75% 84%; /* lavender #C9B8F5 */
+    --primary-foreground: 258 30% 16%;
+    --secondary: 240 8% 16%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 240 8% 16%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 351 68% 78%; /* pastel rose */
+    --destructive-foreground: 350 45% 20%;
+    --warning: 50 84% 75%; /* butter #F5E38A */
+    --warning-foreground: 45 60% 16%;
+    --success: 112 49% 79%; /* mint #B7E4B0 */
+    --success-foreground: 128 32% 22%;
+
+    --border: 240 7% 18%; /* #2A2A30 */
+    --input: 240 8% 16%;
+    --ring: 257 75% 84%;
+
+    --radius: 1rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: dark;
+    background: hsl(var(--background));
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* ---- Leaflet chrome tuned to the soft-dark surface system ---- */
+.leaflet-container {
+  background: hsl(var(--card));
+  font-family: inherit;
+  outline: none;
+}
+.leaflet-interactive:focus {
+  outline: none;
+}
+
+/* Values live in pills — tooltips follow the chip surface */
+.leaflet-tooltip.plot-pill {
+  background: hsl(var(--chip));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: 16px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  box-shadow: none;
+}
+.leaflet-tooltip.plot-pill::before {
+  display: none;
+}
+.plot-tip-title {
+  font-weight: 600;
+}
+.plot-tip-sub {
+  color: hsl(var(--muted-foreground));
+  font-weight: 400;
+  font-size: 12px;
+}
+.plot-tip-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  margin-right: 5px;
+  vertical-align: baseline;
+}
+
+/* Chip pins over plots at low zoom — dark glass chip, pastel status dot */
+.plot-pin-wrap {
+  background: none;
+  border: none;
+}
+.map-pin {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(20, 20, 23, 0.88);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+.map-pin-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.map-pin-anchor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid rgba(20, 20, 23, 0.85);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.leaflet-bar {
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.leaflet-bar a {
+  background: hsl(var(--chip));
+  color: hsl(var(--foreground));
+  border-bottom-color: hsl(var(--border)) !important;
+}
+.leaflet-bar a:hover {
+  background: hsl(var(--raised));
+  color: hsl(var(--foreground));
+}
+.leaflet-bar a.leaflet-disabled {
+  background: hsl(var(--card));
+  color: hsl(var(--muted-foreground));
+}
+
+/* Instant tooltip pills for the geoman toolbar (native title is too subtle).
+   The generic .leaflet-bar gets overflow:hidden for corner rounding — the
+   geoman toolbar must stay visible or the labels are clipped. */
+.leaflet-pm-toolbar {
+  overflow: visible !important;
+}
+.leaflet-pm-toolbar .button-container,
+.leaflet-pm-toolbar a[title] {
+  position: relative;
+}
+.leaflet-pm-toolbar .button-container[title]:hover::after,
+.leaflet-pm-toolbar a[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: hsl(var(--chip));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 1200;
+  pointer-events: none;
+}
+
+/* Pencil icon for the custom Freehand toolbar button */
+.leaflet-pm-icon-freehand {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23444444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20h9'/%3E%3Cpath d='M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z'/%3E%3C/svg%3E") !important;
+  background-size: 18px 18px !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.leaflet-control-attribution {
+  background: hsl(var(--card) / 0.75) !important;
+  color: hsl(var(--muted-foreground)) !important;
+  border-radius: 10px 0 0 0;
+  font-size: 10px;
+}
+.leaflet-control-attribution a {
+  color: hsl(var(--muted-foreground)) !important;
+}

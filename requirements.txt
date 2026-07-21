@@ -1,0 +1,18 @@
+# --- core geo (the farmqa library) ---
+geopandas>=1.0
+shapely>=2.0
+pyproj>=3.6
+
+# --- api ---
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9      # file uploads
+pydantic>=2.6
+
+# --- part B assistant (added at build-order step 12) ---
+python-dotenv>=1.0           # loads GEMINI_API_KEY from .env
+
+# --- tests / tooling ---
+pytest>=8.0
+hypothesis>=6.100            # property-based tests (step 5)
+httpx>=0.27                  # FastAPI TestClient

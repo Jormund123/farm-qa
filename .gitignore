@@ -1,0 +1,25 @@
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.hypothesis/
+
+# node / vite
+web/node_modules/
+web/dist/
+
+# secrets — never commit the real key
+.env
+.env.*
+!.env.example
+
+# docker deliverable (155 MB, over GitHub's file limit)
+farm-qa.tar
+
+# build info
+*.tsbuildinfo
+
+# os
+.DS_Store
