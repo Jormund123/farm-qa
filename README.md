@@ -5,9 +5,8 @@ a file of plots, checks each one for the faults a person would otherwise look
 for by hand, measures the true area, repairs broken shapes, and answers
 questions about the data. The dashboard is how you drive it and see the result.
 
-Built as a take-home for the GRAS "Automation Student Assistant – GIS &
-Sustainability" role. Part A is the checks plus the dashboard; Part B is an
-assistant that can only answer from those checks.
+The project has two parts: Part A is the checks plus the dashboard; Part B is
+an assistant that can only answer from those checks.
 
 ## Run it
 
@@ -147,8 +146,8 @@ risks are written up in `docs/agentic-ai.md`.
 
 The UI is compiled and served by the same process as the API, so there is a
 single thing to run and no cross-origin setup. Uploaded files are kept in memory
-rather than a database, which suits a take-home and keeps the checker from
-having to stand up PostGIS. That is a deliberate limit, noted at the end, and
+rather than a database, which keeps setup simple and avoids having to stand up
+PostGIS. That is a deliberate limit, noted at the end, and
 the dashboard recovers cleanly when the store is cleared by a restart.
 
 ## Layout
