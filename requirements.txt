@@ -9,7 +9,6 @@ uvicorn[standard]>=0.29
 python-multipart>=0.0.9      # file uploads
 pydantic>=2.6
 
-# --- part B assistant (added at build-order step 12) ---
 python-dotenv>=1.0           # loads GEMINI_API_KEY from .env
 
 # --- tests / tooling ---
